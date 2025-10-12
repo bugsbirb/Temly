@@ -1,0 +1,10 @@
+bin/
+obj/
+/packages/
+riderModule.iml
+/_ReSharper.Caches/
+/.idea
+TriMelERM-backend/.env
+TriMelERM-backend/appsettings.Development.json
+TriMelERM-backend.sln
+TriMelERM-backend.sln.DotSettings.user
