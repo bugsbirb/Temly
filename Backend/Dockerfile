@@ -1,6 +1,5 @@
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
-COPY TriMelERM-backend.sln ./
 COPY TriMelERM-backend/TriMelERM-backend.csproj TriMelERM-backend/
 RUN dotnet restore TriMelERM-backend/TriMelERM-backend.csproj
 COPY . .
