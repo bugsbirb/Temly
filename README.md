@@ -4,6 +4,8 @@
 
 ## Todo List
 > - Use less `any` types in the frontend.
+> - Organise the code better in C#.
+> - Improve some of the code, and inconsistentcy, so I don't make the dog mad.
 > - Clean up classes in C#
 > - Split more stuff into reusable functions in C#.
 > - Finish ERLC
