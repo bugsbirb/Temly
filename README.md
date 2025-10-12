@@ -12,9 +12,9 @@
 > - Improve some of the code, and inconsistentcy, so I don't make the dog mad.
 > - Clean up classes in C#
 > - Split more stuff into reusable functions in C#.
-> - Finish ERLC
-> - Auto Refresh data on ERLC
+> - Finish ERLC. Command Logs, auto refresh data, userinfo on user moderation selection, vehicle checks, run a command.
 > - Finish the members section, so you can kick and change peoples roles.
+> - Overview page not finished, data transfers and data wipes, key regenerations.
 
 ## Showcase Images
 > <img width="1915" height="951" alt="image" src="https://github.com/user-attachments/assets/25d56c6b-5075-4cb6-823f-394076237140" />
