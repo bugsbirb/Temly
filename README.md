@@ -3,6 +3,7 @@
 > You can play around with this on https://temly.bugze.me.
 
 ## Todo List
+> - Make a docker compose so it's more easily hosted.
 > - Use less `any` types in the frontend.
 > - Organise the code better in C#.
 > - Improve some of the code, and inconsistentcy, so I don't make the dog mad.
