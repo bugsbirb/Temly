@@ -207,7 +207,6 @@ builder.Services.AddAuthentication(options =>
     options.Scope.Add("guilds");
 });
 
-
 // -- Key Mount
 builder.Services.AddDataProtection()
     .PersistKeysToFileSystem(new DirectoryInfo("/app/DataProtection-Keys"));
