@@ -2,6 +2,9 @@
 > It's a roblox moderation website, it has a dashboard + a modpanel and etc.
 > You can play around with this on https://temly.bugze.me.
 
+> I started this project near the start of **September**, and have spent around **100 hours on this project**. Which may seem like a long time for what's been done, but from this experience I've learned a lot.
+
+
 ## Todo List
 > - Make a docker compose so it's more easily hosted.
 > - Use less `any` types in the frontend.
