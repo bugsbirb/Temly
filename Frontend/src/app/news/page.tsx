@@ -30,7 +30,7 @@ const updates = [
     date: new Date(),
     title: "Release [temp]",
     description:
-      "We are proud to say we have released!\n You can do now become a #1 erlc nerd and grind shifts.\n While neglecting any sun light.",
+      "We are proud to say that we have released!\n You can now become a #1 erlc nerd and grind shifts.\n While neglecting any sun light.",
     version: "v0.1",
     button: { text: "Subscribe", link: "" },
   },
