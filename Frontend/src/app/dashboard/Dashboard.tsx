@@ -23,6 +23,8 @@ import {
 import { Kbd } from "@/components/ui/kbd";
 import { User } from "@/models/user";
 import { SearchIcon } from "lucide-react";
+import { useEffect, useState } from "react";
+
 
 export default function Dashboard({
   server,

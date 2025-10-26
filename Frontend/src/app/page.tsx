@@ -7,14 +7,25 @@ import { useRouter } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Book, EggFried, Hammer, Link, Rocket } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useEffect, useState } from "react";
+import MainPage from "@/components/Dialogs/MainPage";
 
 export default function Home() {
   const session = useSession(false);
   const router = useRouter();
   const mobile = useIsMobile();
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const hasSeen = localStorage.getItem("hasSeenDialog");
+    if (!hasSeen) {
+      setOpen(true);
+    }
+  }, []);
 
   return (
     <div>
+      <MainPage open={open} onOpenChange={setOpen}/>
       <NavigationMenu session={session} />
       <div className="min-h-screen w-full font-sans flex flex-col items-center pt-10 px-4">
         <div>

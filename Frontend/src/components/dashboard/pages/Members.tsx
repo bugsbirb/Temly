@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Ellipsis, Frown, SettingsIcon} from "lucide-react";
+import { Edit, Ellipsis, Frown, SettingsIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -29,6 +29,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { User } from "@/models/user";
+import { EditRole } from "@/services/server";
+import { toast } from "sonner";
 
 export default function Members({
   server,
@@ -46,11 +48,21 @@ export default function Members({
   async function Action(id: string, requestId: string, status: string) {
     try {
       const method = status === "accept" ? "PUT" : "DELETE";
-      const resp = await RequestAction(id, requestId, method)
+      const resp = await RequestAction(id, requestId, method);
       requests.remove(requestId);
-      return resp
+      return resp;
     } catch (error) {}
   }
+
+  // async function MemberUpdate(id: string, roles: string[]) {
+  //   const resp = await EditRole(data.id, id, roles);
+  //   if (!resp.ok) {
+  //     toast.error(await resp.text());
+  //     return false;
+  //   }
+  //   toast.success("Member role updated successfully");
+  //   return true;
+  // }
 
   return (
     <Sidebar data={server} servers={servers} session={session}>
@@ -76,8 +88,8 @@ export default function Members({
                 Configure your preferences and settings.
               </CardDescription>
               <div className="flex m-1 w-full gap-2">
-                <Input placeholder="Search members..."  />
-                <Button >Refresh</Button>
+                <Input placeholder="Search members..." />
+                <Button>Refresh</Button>
               </div>
               <Card className="py-0">
                 <Table>
@@ -88,12 +100,13 @@ export default function Members({
                       </TableHead>
                       <TableHead>Roles</TableHead>
                       <TableHead>Join Date</TableHead>
+                      <TableHead></TableHead>
                     </TableRow>
                   </thead>
                   <TableBody>
                     {data?.members &&
                       data.members.map((member: any, idx: any) => (
-                        <TableRow key={idx} >
+                        <TableRow key={idx}>
                           <TableCell className="font-semibold p-4 flex items-center gap-2">
                             <img
                               src={member.avatar}
@@ -115,28 +128,19 @@ export default function Members({
                                   {role}
                                 </Badge>
                               ))}
-                              <DropdownMenu>
-                                <DropdownMenuTrigger asChild>
-                                  <Badge variant={"outline"}>
-                                    <SettingsIcon />
-                                  </Badge>
-                                </DropdownMenuTrigger>
-
-                                <DropdownMenuContent>
-                                  <DropdownMenuLabel>Roles</DropdownMenuLabel>
-                                  <DropdownMenuSeparator />
-
-                                  <DropdownMenuCheckboxItem checked={true}>
-                                    Role Name
-                                  </DropdownMenuCheckboxItem>
-                                </DropdownMenuContent>
-                              </DropdownMenu>
                             </div>
                           </TableCell>
                           <TableCell>
                             {member.joinDate
                               ? member.joinDate.toLocaleDateString()
                               : "N/A"}
+                          </TableCell>
+                          <TableCell>
+                            <Button variant={"outline"} size={'icon'}>
+                              <Edit />   
+                              {/* TODO: User Edit Modal */}
+                            </Button>
+
                           </TableCell>
                         </TableRow>
                       ))}
@@ -154,8 +158,8 @@ export default function Members({
                 Configure your preferences and settings.
               </CardDescription>
               <div className="flex m-1 w-full gap-2">
-                <Input placeholder="Search requests..."  />
-                <Button variant={"blue"} >Refresh</Button>
+                <Input placeholder="Search requests..." />
+                <Button variant={"blue"}>Refresh</Button>
               </div>
               <Card className="p-0">
                 <Table>

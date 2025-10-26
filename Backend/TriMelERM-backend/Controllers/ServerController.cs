@@ -471,6 +471,60 @@ public class Servers: Controller
         return Ok(true);
     }
 
+    [HttpPut("{serverId}/role/{memberId}/roles")]
+    public async Task<IActionResult> ManageRoles(string serverId, string memberId, [FromBody] List<string> roles)
+    {
+        string userId = AuthHelper.UserId(User);
+        Server? server = await _serverService!.GetByIdAsync(serverId);
+        if (server is null)
+            return NotFound();
+        Permission permission = AuthHelper.GetPermissionAsync(server, serverId, User);
+        if (!permission.ContainsAny(Permission.Administrator | Permission.Dashboard))
+        {
+            return Unauthorized();
+        }
+        server.Roles = server.Roles.Select(r => new Role
+        {
+            Id = r.Id,
+            Name = r.Name,
+            Position = r.Position,
+            Members = new List<string>(r.Members ?? new List<string>())
+        }).ToList();
+        
+        List<Role> authorRoles = server.Roles.Where(r => r.Members.Contains(userId)).ToList();
+        int authorHighestPosition = authorRoles.Any() ? authorRoles.Max(r => r.Position) : -1;
+
+        foreach (string roleId in roles)
+        {
+            Role? role = server.Roles.FirstOrDefault(r => r.Id.ToString() == roleId);
+            if (role == null)
+                continue;
+
+            if (role.Position > authorHighestPosition && userId != server.OwnerId)
+                return Unauthorized($"Insufficient permission to add {role.Name}.");
+
+            if (!role.Members.Contains(memberId))
+                role.Members.Add(memberId);
+        }
+
+        foreach (Role role in server.Roles)
+        {
+            if (!roles.Contains(role.Id.ToString()) && role.Members.Contains(memberId))
+            {
+                if (role.Position > authorHighestPosition && userId != server.OwnerId)
+                    return Unauthorized($"Insufficient permission to remove {role.Name}.");
+
+                role.Members.Remove(memberId);
+            }
+        }
+
+        await _serverService.UpdateAsync(server.Id.ToString(), server);
+        await _redis.DeleteKey($"server:{userId}:{serverId}");
+
+        return Ok("Successfully updated roles.");
+    }
+    
+
     [HttpPut("{serverId}/config/shifts")]
     public async Task<IActionResult> Shifts(string serverId, [FromBody] CShifts config)
     {

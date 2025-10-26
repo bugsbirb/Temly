@@ -28,6 +28,6 @@ public class Role
     public ObjectId Id { get; set; } = default!;
     public string Name { get; set; } = default!;
     public Permission Permissions { get; set; } = Permission.None;
-    public List<string> Members { get; set; } = new();
+    public List<string> Members { get; set; } = new List<string>();
     public int Position { get; set; }
 }

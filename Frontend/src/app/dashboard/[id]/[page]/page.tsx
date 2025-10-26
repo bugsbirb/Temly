@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import Dashboard from "../../Dashboard";
 import { Get, getSessionServerSide } from "@/lib/backend";
 
+
 export default async function DashboardPage({
   params,
 }: {
