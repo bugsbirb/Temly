@@ -104,7 +104,7 @@ export default function Shifts({
             server={server}
           />
           <form onSubmit={form.handleSubmit(onSubmit)}>
-            <Card className=" bg-zinc-800/40">
+            <Card className="bg-zinc-800/40">
               <CardHeader>
                 <CardTitle className="text-2xl">Shifts</CardTitle>
                 <CardDescription className="text-md">

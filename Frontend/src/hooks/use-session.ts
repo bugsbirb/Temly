@@ -19,7 +19,6 @@ export function useSession(redirect: boolean = true) {
       );
 
       if (!response.ok) {
-        console.log("FUCK YOU");
         if (redirect == true) {
           router.push(`${process.env.NEXT_PUBLIC_BackendURL}/login`);
         }

@@ -91,7 +91,7 @@ export default function Modpanel({
     shift?.shift?.breaks?.some((b: any) => b?.startTime && !b?.endTime) ?? false
   );
   const [ShiftType, setType] = useState<string>(
-    shift?.shift?.shiftType ?? server?.config?.shifts?.types[0].name ?? "none"
+    shift?.shift?.shiftType ?? server?.config?.shifts?.types[0]?.name ?? "none"
   );
 
   const { connection } = useSignalR(server?.id);
